@@ -1,0 +1,17 @@
+{
+  "name": "vms",
+  "version": "1.0.0",
+  "description": "Vaccine Management System",
+  "main": "src/index.ts",
+  "scripts": {
+    "dev:local": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "build:local": "tsc -p .",
+    "start:local": "node dist/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "vms"
+  ],
+  "author": "Shree Krishna Lamichhane",
+  "license": "ISC"
+}
