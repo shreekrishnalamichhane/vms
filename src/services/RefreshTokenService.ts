@@ -1,4 +1,5 @@
 import { Prisma, PrismaClient } from "@prisma/client";
+import { Response } from "express";
 const prisma = new PrismaClient();
 
 const RefreshTokenService = {
@@ -39,6 +40,19 @@ const RefreshTokenService = {
                     }
                 }
             })
+        } catch (err: any) {
+            throw err;
+        }
+    },
+    clearToken: (res: Response, name: string) => {
+        // Clear up refreshToken
+        return res.cookie(name, "", {
+            maxAge: 1, // Immediately
+        });
+    },
+    deleteToken: async (token: string) => {
+        try {
+            return await prisma.refreshToken.deleteMany({})
         } catch (err: any) {
             throw err;
         }

@@ -30,6 +30,20 @@ const AuthController = {
             return ResponseService.prepareResponse(res, false, 500, 'Server Error', null);
         }
     },
+    signout: async (req: Request, res: Response) => {
+        try {
+            // Clear up accessToken and refreshToken
+            RefreshTokenService.clearToken(res, ACCESS_TOKEN_NAME)
+            RefreshTokenService.clearToken(res, REFRESH_TOKEN_NAME)
+
+            // Delete refreshToken from database
+            RefreshTokenService.deleteToken(req.cookies[REFRESH_TOKEN_NAME])
+
+            ResponseService.prepareResponse(res, true, 200, "Logout Successful", {})
+        } catch (err: any) {
+            ResponseService.prepareResponse(res, false, 500, "Server Error", {})
+        }
+    },
     signin: async (req: Request, res: Response) => {
         try {
             // Getting the body of the request
@@ -76,7 +90,7 @@ const AuthController = {
                     httpOnly: true,
                     // domain: process.env.APP_URL || 'localhost',
                     secure: process.env.NODE_ENV === "production",
-                    maxAge: Helpers.timeConvert(Number(process.env.ACCESS_TOKEN_EXPIRE) || 15, 'm') * 1000, //5mins
+                    maxAge: Helpers.timeConvert(Number(process.env.ACCESS_TOKEN_EXPIRE) || 15, 'm') * 1000, // 15 mins
                 });
 
                 // Set up Refresh Token
@@ -84,7 +98,7 @@ const AuthController = {
                     httpOnly: true,
                     // domain: process.env.APP_URL || 'localhost',
                     secure: process.env.NODE_ENV === "production",
-                    maxAge: Helpers.timeConvert(Number(process.env.REFRESH_TOKEN_EXPIRE) || 30, 'd') * 1000, //5mins
+                    maxAge: Helpers.timeConvert(Number(process.env.REFRESH_TOKEN_EXPIRE) || 30, 'd') * 1000, // 30 days
                 });
 
                 // Send the login response with access and refresh tokens

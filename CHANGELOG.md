@@ -1,3 +1,9 @@
+v1.1.3
+
+- `/signout` Implemented
+
+---
+
 v1.1.2
 
 - `AuthMiddleware` Implemented
