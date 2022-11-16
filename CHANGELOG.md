@@ -1,3 +1,9 @@
+v1.1.2
+
+- `AuthMiddleware` Implemented
+
+---
+
 v1.1.1
 
 - `JWT Authentication` Implemented

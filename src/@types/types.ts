@@ -19,3 +19,7 @@ export type TypeRefreshtoken = {
     expire: Number,
     userId: Number
 }
+export type TypeJwtPayload = {
+    id: Number,
+    email: String
+}

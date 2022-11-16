@@ -26,6 +26,22 @@ const RefreshTokenService = {
         } catch (err: any) {
             throw err;
         }
+    },
+
+    getToken: async (token: string, userId: number) => {
+        try {
+            return await prisma.refreshToken.findFirst({
+                where: {
+                    token,
+                    userId,
+                    expireAt: {
+                        gte: Number(Date.now())
+                    }
+                }
+            })
+        } catch (err: any) {
+            throw err;
+        }
     }
 }
 export default RefreshTokenService

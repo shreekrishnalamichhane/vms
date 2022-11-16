@@ -1,11 +1,12 @@
 import { User } from "@prisma/client";
 import { Request, Response } from "express"
 import Helpers from "../helpers/helpers";
+import RefreshTokenService from "../services/RefreshTokenService";
 import ResponseService from "../services/ResponseService";
 import UserService from "../services/UserService";
 
-const ACCESS_TOKEN_NAME = "vms_access_token";
-const REFRESH_TOKEN_NAME = "vms_refresh_token";
+const ACCESS_TOKEN_NAME = process.env.ACCESS_TOKEN_NAME || "vms_access_token";
+const REFRESH_TOKEN_NAME = process.env.REFRESH_TOKEN_NAME || "vms_refresh_token";
 
 const AuthController = {
     // Function for signup
@@ -104,13 +105,14 @@ const AuthController = {
             return ResponseService.prepareResponse(res, false, 500, 'Server Error', {})
         }
     },
-    refresh: async (req: Request, res: Response) => {
+    me: async (req: Request, res: Response) => {
         try {
-
+            let user = await UserService.getUserById(req.body.userId);
+            ResponseService.prepareResponse(res, true, 200, 'Profile Data', Helpers.removeSecretFields(user, ['password']))
         } catch (err: any) {
-
+            ResponseService.prepareResponse(res, false, 500, 'Server Error', {})
         }
-    },
+    }
 
 }
 

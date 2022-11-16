@@ -1,5 +1,7 @@
 import jwt from "jsonwebtoken";
 
+import { TypeJwtPayload } from "../@types/types";
+
 const Helpers = {
     createToken: async (payload: any, secret: string, expiryDate: string) => {
         // console.log(payload, secret, expiryDate)
@@ -10,6 +12,14 @@ const Helpers = {
                 expiresIn: expiryDate.toString(),
             }
         );
+    },
+    decodeToken: (token: string, secret: string) => {
+        try {
+            const { id, email } = jwt.verify(token, secret) as TypeJwtPayload;
+            return { id, email };
+        } catch (err) {
+            throw (err)
+        }
     },
     timeConvert: (duration: number, unit: string) => {
         switch (unit) {
