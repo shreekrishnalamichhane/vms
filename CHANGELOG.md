@@ -1,3 +1,10 @@
+v1.1.1
+
+- `JWT Authentication` Implemented
+- `/signin` complete
+
+---
+
 v1.1.0
 
 - `dotenv` added for environment variables

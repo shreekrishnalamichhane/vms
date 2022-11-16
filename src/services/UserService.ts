@@ -1,7 +1,14 @@
 import { Prisma, PrismaClient } from "@prisma/client";
-import { TypeSignin } from "../@types/types";
+import { TypeSignin, TypeRefreshtoken } from "../@types/types";
 import bcrypt from "bcrypt";
+import Helpers from "../helpers/helpers";
+import RefreshTokenService from "./RefreshTokenService";
 const prisma = new PrismaClient();
+
+const ACCESS_TOKEN = process.env.ACCESS_TOKEN || 'this-is-a-random-text';
+const ACCESS_TOKEN_EXPIRE = Number(process.env.ACCESS_TOKEN_EXPIRE) || 15;
+const REFRESH_TOKEN = process.env.REFRESH_TOKEN || 'this-is-a-another-random-text';
+const REFRESH_TOKEN_EXPIRE = Number(process.env.REFRESH_TOKEN_EXPIRE) || 30;
 
 const UserService = {
     // Function to get a user by provided email
@@ -23,6 +30,19 @@ const UserService = {
             return await prisma.user.findFirst({
                 where: {
                     id
+                }
+            })
+        } catch (err: any) {
+            throw err;
+        }
+    },
+    // Function to get a user by provided id
+    getUserByEmailAndPassword: async (email: string, password: string) => {
+        try {
+            return await prisma.user.findFirst({
+                where: {
+                    email,
+                    password
                 }
             })
         } catch (err: any) {
@@ -58,6 +78,32 @@ const UserService = {
             return user;
         } catch (err: any) {
             throw err;
+        }
+    },
+
+    // Function to compare the plain password with its stored hash
+    comparePassword: async (password: string, hash: string) => {
+        return await bcrypt.compare(password, hash);
+    },
+
+    // Generate and Save tokens
+    generateTokens: async (payload: any) => {
+        return {
+            "accessToken": await Helpers.createToken(payload, ACCESS_TOKEN, Helpers.timeConvert(ACCESS_TOKEN_EXPIRE, 'm') + 's'),
+            "refreshToken": await Helpers.createToken(payload, REFRESH_TOKEN, Helpers.timeConvert(REFRESH_TOKEN_EXPIRE, 'd') + 's'),
+            "accessTokenExpire": Helpers.addTime(ACCESS_TOKEN_EXPIRE, 'm'),
+            "refreshTokenExpire": Helpers.addTime(REFRESH_TOKEN_EXPIRE, 'd'),
+        }
+    },
+
+    // Function to store refresh token to database
+    saveRefreshToken: async (token: string, expire: number, userId: number) => {
+        try {
+            return await RefreshTokenService.storeToken({
+                token, expire, userId
+            })
+        } catch (error) {
+            throw error;
         }
     }
 }

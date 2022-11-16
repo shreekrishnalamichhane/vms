@@ -13,3 +13,9 @@ export type TypeSignin = {
     email: String,
     password: String
 }
+
+export type TypeRefreshtoken = {
+    token: String,
+    expire: Number,
+    userId: Number
+}
