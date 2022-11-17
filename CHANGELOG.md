@@ -1,3 +1,11 @@
+v1.1.4
+
+- Vaccine CRUD Implemented
+- Local File Storage Implemented
+- Plan: Remote File Storage in next version
+
+---
+
 v1.1.3
 
 - `/signout` Implemented

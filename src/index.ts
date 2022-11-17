@@ -2,16 +2,26 @@ import path from "path";
 import dotenv from "dotenv";
 import express from "express";
 import cookieParser from "cookie-parser";
+
 import AuthRoute from "./routes/AuthRoute";
+import vaccineController from "./controllers/VaccineController";
+import AuthMiddleware from "./middlewares/AuthMiddleware";
+
 dotenv.config();
 
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "../public")));
 app.use(cookieParser());
 
+
+app.get("/vaccine", [AuthMiddleware], vaccineController.index)
+app.post("/vaccine", [AuthMiddleware], vaccineController.store)
+app.put("/vaccine/:id", [AuthMiddleware], vaccineController.update)
+app.delete("/vaccine/:id", [AuthMiddleware], vaccineController.delete)
+app.delete("/patient/:id", [AuthMiddleware], vaccineController.delete)
 
 app.use("/", AuthRoute)
 

@@ -23,3 +23,15 @@ export type TypeJwtPayload = {
     id: Number,
     email: String
 }
+
+export type TypeVaccine = {
+    name: String,
+    description: String,
+    image: String,
+    numberOfDoses: Number,
+    manufacturer: String,
+    developedYear: Number,
+    ageGroup: String,
+    sideEffects: String,
+    userId: Number
+}

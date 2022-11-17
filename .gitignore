@@ -131,3 +131,5 @@ dist
 
 *.db
 *.db-journal
+
+/public
