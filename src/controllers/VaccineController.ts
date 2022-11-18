@@ -1,6 +1,6 @@
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime"
 import { Request, Response } from "express"
-import ImageService from "../services/ImageService"
+import RemoteImageService from "../services/RemoteImageService"
 import ResponseService from "../services/ResponseService"
 import UserService from "../services/UserService"
 import VaccineService from "../services/VaccineService"
@@ -66,14 +66,14 @@ const VaccineController = {
             if (vaccine) { // If vaccine exixts, proceed
 
                 if (req.body.image) {
-                    // Try to delete the associated image
-                    ImageService.deleteImageFromFileSystem('./public/' + vaccine!.image)
+                    // Try to delete the remote image
+                    RemoteImageService.delete(vaccine!.image);
                 }
                 // Prepare Data
                 let data = {
                     name: req.body.name,
                     description: req.body.description,
-                    image: req.body.image ? ImageService.saveImageToFileSystem(req.body.image, './public/images/') : String(vaccine!.image),
+                    image: req.body.image ? await RemoteImageService.upload(String(req.body.image)) : String(vaccine!.image),
                     numberOfDoses: req.body.numberOfDoses,
                     manufacturer: req.body.manufacturer,
                     developedYear: req.body.developedYear,
@@ -83,10 +83,10 @@ const VaccineController = {
                 }
 
                 // Assign and update the existing vaccine
-                await VaccineService.updateVaccine(data, Number(req.params.id))
+                let vaccineUpdate = await VaccineService.updateVaccine(data, Number(req.params.id))
 
                 // Return the success response
-                return ResponseService.prepareResponse(res, true, 200, 'Success Update', vaccine)
+                return ResponseService.prepareResponse(res, true, 200, 'Success Update', vaccineUpdate)
             }
 
             // Fallback
@@ -104,7 +104,7 @@ const VaccineController = {
             let vaccine = await VaccineService.getVaccine(Number(req.params.id))
             if (vaccine) { // If vaccine exists, proceed
                 // Try to delete the associated image
-                ImageService.deleteImageFromFileSystem('./public/' + vaccine!.image)
+                RemoteImageService.delete(vaccine!.image);
 
                 // Delete the database instance
                 await VaccineService.deleteVaccine(Number(req.params.id))

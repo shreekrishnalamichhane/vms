@@ -1,3 +1,9 @@
+v1.1.5
+
+- Remote File Storage implemented with `Firebase Storage`
+
+---
+
 v1.1.4
 
 - Vaccine CRUD Implemented

@@ -4,6 +4,7 @@ import { TypeVaccine } from "../@types/types";
 import ImageService from "./ImageService";
 
 import dotenv from "dotenv";
+import RemoteImageService from "./RemoteImageService";
 dotenv.config()
 
 const VaccineService = {
@@ -30,7 +31,7 @@ const VaccineService = {
                 data: {
                     name: vaccine.name.toString(),
                     description: vaccine.description.toString(),
-                    image: ImageService.saveImageToFileSystem(vaccine.image, './public/images/'),
+                    image: await RemoteImageService.upload(String(vaccine.image)),
                     numberOfDoses: vaccine.numberOfDoses ? Number(vaccine.numberOfDoses) : null,
                     manufacturer: vaccine.manufacturer ? vaccine.manufacturer.toString() : null,
                     developedYear: vaccine.developedYear ? Number(vaccine.developedYear) : null,
