@@ -1,9 +1,10 @@
-import { PrismaClientKnownRequestError } from "@prisma/client/runtime"
 import { Request, Response } from "express"
+import ErrorService from "../services/ErrorService"
 import RemoteImageService from "../services/RemoteImageService"
 import ResponseService from "../services/ResponseService"
 import UserService from "../services/UserService"
 import VaccineService from "../services/VaccineService"
+import VaccineValidation from "../validations/VaccineValidation"
 
 const VaccineController = {
     index: async (req: Request, res: Response) => {
@@ -22,6 +23,7 @@ const VaccineController = {
     store: async (req: Request, res: Response) => {
         try {
             // Validate Input Data
+            VaccineValidation.VaccineStoreInputValidation.parse(req.body)
 
             // Get the User Instance with provided userId
             let user = await UserService.getUserById(req.body.userId);
@@ -53,13 +55,13 @@ const VaccineController = {
             // Fallback
             return ResponseService.prepareResponse(res, false, 500, 'Server Error', {})
         } catch (err: any) {
-            console.log(err)
-            return ResponseService.prepareResponse(res, false, 500, 'Server Error', {})
+            return ErrorService.handleError(res, err)
         }
     },
     update: async (req: Request, res: Response) => {
         try {
             // Validate Input Data
+            VaccineValidation.VaccineUpdateInputValidation.parse(req.body)
 
             // Look for the existing vaccine with provided id
             let vaccine = await VaccineService.getVaccine(Number(req.params.id))
@@ -92,10 +94,7 @@ const VaccineController = {
             // Fallback
             return ResponseService.prepareResponse(res, false, 404, 'Not Found', {})
         } catch (err: any) {
-            if (err instanceof PrismaClientKnownRequestError) {
-                return ResponseService.prepareResponse(res, false, 400, String(err!.meta!.cause), err)
-            }
-            return ResponseService.prepareResponse(res, false, 500, 'Server Error', {})
+            return ErrorService.handleError(res, err)
         }
     },
     delete: async (req: Request, res: Response) => {

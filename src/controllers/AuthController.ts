@@ -1,9 +1,11 @@
-import { User } from "@prisma/client";
 import { Request, Response } from "express"
 import Helpers from "../helpers/helpers";
+import ErrorService from "../services/ErrorService";
 import RefreshTokenService from "../services/RefreshTokenService";
 import ResponseService from "../services/ResponseService";
 import UserService from "../services/UserService";
+
+import AuthValidation from "../validations/AuthValidation";
 
 const ACCESS_TOKEN_NAME = process.env.ACCESS_TOKEN_NAME || "vms_access_token";
 const REFRESH_TOKEN_NAME = process.env.REFRESH_TOKEN_NAME || "vms_refresh_token";
@@ -16,6 +18,9 @@ const AuthController = {
             // Expected Type : TypeSignin
             const data = req.body;
 
+            // Validate Input Data
+            AuthValidation.RegisterInputValidation.parse(data)
+
             // Look for the user with the requested email
             const user = await UserService.getUserByEmail(data.email);
 
@@ -27,7 +32,7 @@ const AuthController = {
                 return ResponseService.prepareResponse(res, false, 409, 'Email Already Exists', null);
             }
         } catch (err: any) { // Catch the error
-            return ResponseService.prepareResponse(res, false, 500, 'Server Error', null);
+            return ErrorService.handleError(res, err)
         }
     },
     signout: async (req: Request, res: Response) => {
@@ -41,7 +46,7 @@ const AuthController = {
 
             ResponseService.prepareResponse(res, true, 200, "Logout Successful", {})
         } catch (err: any) {
-            ResponseService.prepareResponse(res, false, 500, "Server Error", {})
+            return ErrorService.handleError(res, err)
         }
     },
     signin: async (req: Request, res: Response) => {
@@ -50,8 +55,8 @@ const AuthController = {
             // Expected Type : TypeSignin
             const data = req.body;
 
-            // data Validation 
-
+            // Validate Input Data
+            AuthValidation.LogininputValidation.parse(data)
 
             // Look for the user with the requested email
             let user = await UserService.getUserByEmail(data.email);
@@ -112,11 +117,10 @@ const AuthController = {
             }
 
             // FailSafe
-            return ResponseService.prepareResponse(res, false, 500, "Server Error", {})
+            return ErrorService.handleError(res, 'Server Error')
 
         } catch (err: any) {
-            console.log(err)
-            return ResponseService.prepareResponse(res, false, 500, 'Server Error', {})
+            return ErrorService.handleError(res, err)
         }
     },
     me: async (req: Request, res: Response) => {
@@ -124,7 +128,7 @@ const AuthController = {
             let user = await UserService.getUserById(req.body.userId);
             ResponseService.prepareResponse(res, true, 200, 'Profile Data', Helpers.removeSecretFields(user, ['password']))
         } catch (err: any) {
-            ResponseService.prepareResponse(res, false, 500, 'Server Error', {})
+            return ErrorService.handleError(res, err)
         }
     }
 

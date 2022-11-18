@@ -1,3 +1,9 @@
+v1.1.6
+
+- Request Input Validation Implemented
+
+---
+
 v1.1.5
 
 - Remote File Storage implemented with `Firebase Storage`
