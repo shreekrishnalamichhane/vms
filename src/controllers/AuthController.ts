@@ -130,6 +130,30 @@ const AuthController = {
         } catch (err: any) {
             return ErrorService.handleError(res, err)
         }
+    },
+    profile: async (req: Request, res: Response) => {
+        try {
+            // Getting the body of the request
+            // Expected Type : TypeUpdateProfile
+            const data = req.body;
+
+            // Validate Input Data
+            AuthValidation.UpdateProfileInputValidation.parse(data)
+
+            // Try to update the user
+            let userUpdate = await UserService.updateUserProfile(data, req.body.userId)
+
+            if (userUpdate) {// If user update is success, return success reponse
+                return ResponseService.prepareResponse(res, true, 200, 'Update Successful', userUpdate)
+            }
+
+            // Fallback - Retun 404 - User Not Found 
+            return ResponseService.prepareResponse(res, false, 404, 'Not Found', {})
+
+        } catch (err: any) {
+            return ErrorService.handleError(res, err)
+        }
+
     }
 
 }

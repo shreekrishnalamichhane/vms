@@ -1,5 +1,5 @@
 import { Prisma, PrismaClient } from "@prisma/client";
-import { TypeSignin, TypeRefreshtoken } from "../@types/types";
+import { TypeSignin, TypeUpdateProfile } from "../@types/types";
 import bcrypt from "bcrypt";
 import Helpers from "../helpers/helpers";
 import RefreshTokenService from "./RefreshTokenService";
@@ -104,6 +104,23 @@ const UserService = {
             })
         } catch (error) {
             throw error;
+        }
+    },
+
+    // Update User Profile
+    updateUserProfile: async (data: TypeUpdateProfile, userId: number) => {
+        try {
+            return await prisma.user.update({
+                where: {
+                    id: userId
+                },
+                data: {
+                    name: String(data.name),
+                    phone: String(data.phone),
+                }
+            })
+        } catch (err: any) {
+            throw err;
         }
     }
 }

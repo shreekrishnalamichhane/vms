@@ -35,3 +35,7 @@ export type TypeVaccine = {
     sideEffects: String,
     userId: Number
 }
+export type TypeUpdateProfile = {
+    name: String,
+    phone: String
+}

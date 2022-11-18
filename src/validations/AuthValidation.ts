@@ -8,6 +8,10 @@ const AuthValidation = {
     LogininputValidation: z.object({
         email: z.string().email(),
         password: z.string()
+    }),
+    UpdateProfileInputValidation: z.object({
+        name: z.string(),
+        phone: z.string()
     })
 }
 export default AuthValidation

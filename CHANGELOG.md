@@ -1,3 +1,9 @@
+v1.2.0
+
+- `/profile` Implemented to update user profile
+
+---
+
 v1.1.6
 
 - Request Input Validation Implemented
