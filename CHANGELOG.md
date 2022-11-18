@@ -1,3 +1,9 @@
+v1.3.0
+
+- Test Case for `Auth` and `Vaccine` defined
+
+---
+
 v1.2.1
 
 - Minor Bug Fixes

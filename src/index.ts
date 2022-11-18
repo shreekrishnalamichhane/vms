@@ -11,10 +11,11 @@ dotenv.config();
 
 const app = express();
 
-app.use(express.json());
+app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "../public")));
 app.use(cookieParser());
+app.use(express.urlencoded({ extended: true, limit: '10mb' }))
 
 
 app.get("/vaccine", [AuthMiddleware], vaccineController.index)
@@ -25,6 +26,9 @@ app.delete("/patient/:id", [AuthMiddleware], vaccineController.delete)
 
 app.use("/", AuthRoute)
 
+export default app
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server running at ${PORT}`));
+if (process.env.NODE_ENV !== "test") {
+    const PORT = process.env.PORT || 3000;
+    app.listen(PORT, () => console.log(`Server running at ${PORT}`));
+}
