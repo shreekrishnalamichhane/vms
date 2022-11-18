@@ -1,3 +1,9 @@
+v1.2.1
+
+- Minor Bug Fixes
+
+---
+
 v1.2.0
 
 - `/profile` Implemented to update user profile

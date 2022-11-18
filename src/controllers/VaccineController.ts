@@ -16,7 +16,6 @@ const VaccineController = {
             });
             return ResponseService.prepareResponse(res, true, 200, 'Success Index', vaccines)
         } catch (err: any) {
-            console.log(err)
             return ResponseService.prepareResponse(res, false, 500, 'Server Error', {})
         }
     },

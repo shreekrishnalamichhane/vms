@@ -40,6 +40,7 @@ const VaccineService = {
                     userId: vaccine.userId ? Number(vaccine.userId) : null,
                 },
                 select: {
+                    id: true,
                     name: true,
                     description: true,
                     image: true,
@@ -76,6 +77,7 @@ const VaccineService = {
                     userId: vaccine.userId ? Number(vaccine.userId) : null,
                 },
                 select: {
+                    id: true,
                     name: true,
                     description: true,
                     image: true,

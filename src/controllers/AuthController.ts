@@ -63,7 +63,7 @@ const AuthController = {
 
             // If no user exists with the email, send error response
             if (!user) {
-                return ResponseService.prepareResponse(res, false, 422, 'Invalid Email or Password', {})
+                return ResponseService.prepareResponse(res, false, 401, 'Invalid Email or Password', {})
             }
 
             // If user email exists, then match the password
@@ -71,7 +71,7 @@ const AuthController = {
 
             // If password not matched, then return error response
             if (isPasswordMatch === false) {
-                return ResponseService.prepareResponse(res, false, 422, 'Invalid Email or Password', {})
+                return ResponseService.prepareResponse(res, false, 401, 'Invalid Email or Password', {})
             }
 
             // If user is authenticated, continue the login process
@@ -126,7 +126,7 @@ const AuthController = {
     me: async (req: Request, res: Response) => {
         try {
             let user = await UserService.getUserById(req.body.userId);
-            ResponseService.prepareResponse(res, true, 200, 'Profile Data', Helpers.removeSecretFields(user, ['password']))
+            return ResponseService.prepareResponse(res, true, 200, 'Profile Data', Helpers.removeSecretFields(user, ['password']))
         } catch (err: any) {
             return ErrorService.handleError(res, err)
         }
