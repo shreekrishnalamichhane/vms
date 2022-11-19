@@ -1,3 +1,9 @@
+v2.0.0
+
+- Code Segregation for `client` and `server` with seperate folder
+
+---
+
 v1.4.0
 
 - `mandatory` field added for vaccines
