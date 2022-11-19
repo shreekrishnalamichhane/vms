@@ -1,3 +1,9 @@
+v2.0.1
+
+- Basic `client` project setup with [Vite](https://vitejs.dev/) & [React](https://reactjs.org/)
+
+---
+
 v2.0.0
 
 - Code Segregation for `client` and `server` with seperate folder
