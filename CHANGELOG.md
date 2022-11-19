@@ -1,3 +1,9 @@
+v1.4.0
+
+- `mandatory` field added for vaccines
+
+---
+
 v1.3.0
 
 - Test Case for `Auth` and `Vaccine` defined

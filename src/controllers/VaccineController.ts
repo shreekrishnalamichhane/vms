@@ -40,7 +40,8 @@ const VaccineController = {
                 developedYear: req.body.developedYear,
                 ageGroup: req.body.ageGroup,
                 sideEffects: req.body.sideEffects,
-                userId: req.body.userId
+                mandatory: req.body.mandatory,
+                userId: req.body.userId,
             }
 
             // Assign and create a new vaccine
@@ -80,7 +81,8 @@ const VaccineController = {
                     developedYear: req.body.developedYear,
                     ageGroup: req.body.ageGroup,
                     sideEffects: req.body.sideEffects,
-                    userId: req.body.userId
+                    mandatory: req.body.mandatory,
+                    userId: req.body.userId,
                 }
 
                 // Assign and update the existing vaccine

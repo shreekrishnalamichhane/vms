@@ -34,6 +34,7 @@ export type TypeVaccine = {
     ageGroup: String,
     sideEffects: String,
     userId: Number
+    mandatory: Boolean
 }
 export type TypeUpdateProfile = {
     name: String,

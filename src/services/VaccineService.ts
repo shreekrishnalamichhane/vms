@@ -37,6 +37,7 @@ const VaccineService = {
                     developedYear: vaccine.developedYear ? Number(vaccine.developedYear) : null,
                     ageGroup: vaccine.ageGroup ? vaccine.ageGroup.toString() : null,
                     sideEffects: vaccine.sideEffects ? vaccine.sideEffects.toString() : null,
+                    mandatory: vaccine.mandatory ? true : false,
                     userId: vaccine.userId ? Number(vaccine.userId) : null,
                 },
                 select: {
@@ -49,6 +50,7 @@ const VaccineService = {
                     developedYear: true,
                     ageGroup: true,
                     sideEffects: true,
+                    mandatory: true,
                     userId: true,
                 }
             })
@@ -74,6 +76,7 @@ const VaccineService = {
                     developedYear: vaccine.developedYear ? Number(vaccine.developedYear) : null,
                     ageGroup: vaccine.ageGroup ? vaccine.ageGroup.toString() : null,
                     sideEffects: vaccine.sideEffects ? vaccine.sideEffects.toString() : null,
+                    mandatory: vaccine.mandatory ? true : false,
                     userId: vaccine.userId ? Number(vaccine.userId) : null,
                 },
                 select: {
@@ -86,6 +89,7 @@ const VaccineService = {
                     developedYear: true,
                     ageGroup: true,
                     sideEffects: true,
+                    mandatory: true,
                     userId: true,
                 }
             })
