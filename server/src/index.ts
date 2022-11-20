@@ -2,6 +2,7 @@ import path from "path";
 import dotenv from "dotenv";
 import express from "express";
 import cookieParser from "cookie-parser";
+var cors = require('cors')
 
 import AuthRoute from "./routes/AuthRoute";
 import vaccineController from "./controllers/VaccineController";
@@ -16,6 +17,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "../public")));
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true, limit: '10mb' }))
+
+const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:7000"
+app.use(cors({
+    origin: [FRONTEND_URL],
+    credentials: true,
+    optionsSuccessStatus: 200
+}))
 
 
 app.get("/vaccine", [AuthMiddleware], vaccineController.index)

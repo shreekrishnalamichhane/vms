@@ -1,3 +1,10 @@
+v2.1.1
+
+- `cors` Implemented
+- `cors` allows `*`
+
+---
+
 v2.1.0
 
 - `/signup` now requires `name` and `phone` as well
