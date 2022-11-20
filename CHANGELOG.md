@@ -1,3 +1,9 @@
+v2.1.0
+
+- `/signup` now requires `name` and `phone` as well
+
+---
+
 v2.0.1
 
 - Basic `client` project setup with [Vite](https://vitejs.dev/) & [React](https://reactjs.org/)

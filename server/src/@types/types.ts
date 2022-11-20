@@ -7,7 +7,9 @@ export type TypeUser = {
 
 export type TypeSignup = {
     email: String,
-    password: String
+    password: String,
+    name: String,
+    phone: String
 }
 export type TypeSignin = {
     email: String,

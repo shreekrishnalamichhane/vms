@@ -1,5 +1,5 @@
 import { Prisma, PrismaClient } from "@prisma/client";
-import { TypeSignin, TypeUpdateProfile } from "../@types/types";
+import { TypeSignup, TypeSignin, TypeUpdateProfile } from "../@types/types";
 import bcrypt from "bcrypt";
 import Helpers from "../helpers/helpers";
 import RefreshTokenService from "./RefreshTokenService";
@@ -51,7 +51,7 @@ const UserService = {
     },
 
     // Function to create a user with provided info
-    createUser: async (userData: TypeSignin) => {
+    createUser: async (userData: TypeSignup) => {
         try {
             // Generate password hash salt
             const salt = await bcrypt.genSalt();
@@ -63,7 +63,9 @@ const UserService = {
             const user = await prisma.user.create({
                 data: {
                     email: userData.email.toString(),
-                    password: pwdHash
+                    password: pwdHash,
+                    name: userData.name.toString(),
+                    phone: userData.phone.toString()
                 },
                 // Select some fields after create
                 select: {
