@@ -27,6 +27,7 @@ app.use(cors({
 
 
 app.get("/vaccine", [AuthMiddleware], vaccineController.index)
+app.get("/vaccine/:id", [AuthMiddleware], vaccineController.show)
 app.post("/vaccine", [AuthMiddleware], vaccineController.store)
 app.put("/vaccine/:id", [AuthMiddleware], vaccineController.update)
 app.delete("/vaccine/:id", [AuthMiddleware], vaccineController.delete)

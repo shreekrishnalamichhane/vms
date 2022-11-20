@@ -118,6 +118,22 @@ const VaccineController = {
         } catch (err: any) {
             return ResponseService.prepareResponse(res, false, 500, 'Server Error', {})
         }
+    },
+    show: async (req: Request, res: Response) => {
+        try {
+            // Look for the existing vaccine with provided id
+            let vaccine = await VaccineService.getVaccine(Number(req.params.id))
+            if (vaccine) { // If vaccine exists, proceed
+
+                // Return the success response
+                return ResponseService.prepareResponse(res, true, 200, 'Success Show', vaccine)
+            }
+
+            //Fallback - Vaccine not found
+            return ResponseService.prepareResponse(res, false, 404, 'Not Found', {})
+        } catch (err: any) {
+            return ResponseService.prepareResponse(res, false, 500, 'Server Error', {})
+        }
     }
 }
 

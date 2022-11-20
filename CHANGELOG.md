@@ -1,3 +1,9 @@
+v2.2.0
+
+- Show `/vaccine/:id` Implemented
+
+---
+
 v2.1.1
 
 - `cors` Implemented
