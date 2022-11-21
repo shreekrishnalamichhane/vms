@@ -67,7 +67,7 @@ const VaccineController = {
             let vaccine = await VaccineService.getVaccine(Number(req.params.id))
             if (vaccine) { // If vaccine exixts, proceed
 
-                if (req.body.image) {
+                if (req.body.image && req.body.image !== "") {
                     // Try to delete the remote image
                     RemoteImageService.delete(vaccine!.image);
                 }
@@ -75,7 +75,7 @@ const VaccineController = {
                 let data = {
                     name: req.body.name,
                     description: req.body.description,
-                    image: req.body.image ? await RemoteImageService.upload(String(req.body.image)) : String(vaccine!.image),
+                    image: (req.body.image && req.body.image !== "") ? await RemoteImageService.upload(String(req.body.image)) : String(vaccine!.image),
                     numberOfDoses: req.body.numberOfDoses,
                     manufacturer: req.body.manufacturer,
                     developedYear: req.body.developedYear,

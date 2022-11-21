@@ -1,3 +1,9 @@
+v2.2.1
+
+- Bug Fixes
+
+---
+
 v2.2.0
 
 - Show `/vaccine/:id` Implemented

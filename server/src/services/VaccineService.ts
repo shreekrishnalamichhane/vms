@@ -104,6 +104,9 @@ const VaccineService = {
         return await prisma.vaccine.findFirst({
             where: {
                 id: vaccineId
+            },
+            include: {
+                User: true
             }
         })
     },
