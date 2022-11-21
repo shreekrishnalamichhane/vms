@@ -1,3 +1,9 @@
+v2.7.0
+
+- Updated Readme
+
+---
+
 v2.6.1
 
 - Persistant Volume Setup for containers

@@ -20,31 +20,45 @@
 
 ## Prerequisites
 
-...
-
-```
-Will be added later
-```
+1. Your system needs to have NodeJs installed
+   Install it from [https://nodejs.org/en/](https://nodejs.org/en/)
 
 ## Installation
 
-...
+First clone the github repo
 
-```
-git clone ...
+```sh
+git clone https://github.com/shreekrishnalamichhane/vms.git
 ```
 
-```
-...
+On the root, run
+
+```sh
+docker compose up --detach --build
 ```
 
 ## Demo
 
-Will be added later
+Frontend Demo at : [https://vms.shreekrishnalamichhane.com.np](https://vms.shreekrishnalamichhane.com.np)
+Backend Demo at : [https://vmss.shreekrishnalamichhane.com.np](https://vmss.shreekrishnalamichhane.com.np)
 
 ## Tests
 
-Will be added later
+###### Default Test
+
+- Goto root directory
+- Run `cd server`
+- Run `npm test` or `yarn test`
+
+![Default Test](./readme/default.png)
+
+###### Coverage Test
+
+- Goto root directory
+- Run `cd server`
+- Run `npm test:coverage` or `yarn test:coverage`
+
+![Coverage Test](./readme/coverage.png)
 
 ## Author
 
