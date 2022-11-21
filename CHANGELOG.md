@@ -1,3 +1,9 @@
+v2.6.1
+
+- Persistant Volume Setup for containers
+
+---
+
 v2.6.0
 
 - Containerized with `docker compose`

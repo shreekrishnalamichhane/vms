@@ -6,6 +6,8 @@ services:
     build: ./server
     ports:
       - "5000:4000"
+    volumes:
+      - un_server:/app/prisma/data
     restart: on-failure
   un_client:
     env_file:
@@ -15,4 +17,9 @@ services:
       - "5001:4173"
     depends_on:
       - "un_server"
+    volumes:
+      - un_client:/app/public
     restart: on-failure
+volumes:
+  un_client: {}
+  un_server: {}
