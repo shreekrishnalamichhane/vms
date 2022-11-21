@@ -1,6 +1,6 @@
 import request from "supertest"
 import { v4 as uuidv4 } from "uuid"
-import app from "../src/index"
+import app from "../index"
 import { SignIn as Login } from "./_helpers"
 
 let TEST_NAME = uuidv4(),

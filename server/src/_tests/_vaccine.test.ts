@@ -1,7 +1,7 @@
 import request from "supertest"
 import { v4 as uuidv4 } from "uuid"
 import { SignUp as Register, SignIn as Login, RemoveKeysFromObject, ChangeKeyDataType, getBase64 } from "./_helpers"
-import app from "../src/index"
+import app from "../index"
 
 
 
