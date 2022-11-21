@@ -1,3 +1,11 @@
+v2.4.0
+
+- `ER Diagram` added
+- `C4 L2 Container Diagram` added
+- `C4 L3 Component Diagram` added
+
+---
+
 v2.3.0
 
 - Frontend Implemented
