@@ -5,8 +5,8 @@
   "main": "src/index.ts",
   "scripts": {
     "dev:local": "ts-node-dev --respawn --exit-child --transpile-only src/index.ts",
-    "build:local": "tsc -p .",
-    "start:local": "node dist/index.js",
+    "build": "tsc",
+    "start": "node dist/index.js",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch",
     "test:watch:coverage": "jest --watch --coverage",

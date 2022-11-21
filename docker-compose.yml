@@ -1,0 +1,18 @@
+version: "3.8"
+services:
+  un_server:
+    env_file:
+      - ./server/.env
+    build: ./server
+    ports:
+      - "5000:4000"
+    restart: on-failure
+  un_client:
+    env_file:
+      - ./client/.env
+    build: ./client
+    ports:
+      - "5001:4173"
+    depends_on:
+      - "un_server"
+    restart: on-failure

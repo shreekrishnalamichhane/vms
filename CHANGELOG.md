@@ -1,3 +1,15 @@
+v2.6.0
+
+- Containerized with `docker compose`
+
+---
+
+v2.5.0
+
+- TestCases migrated inside `src` folder
+
+---
+
 v2.4.0
 
 - `ER Diagram` added
