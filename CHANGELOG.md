@@ -1,3 +1,9 @@
+v2.3.0
+
+- Frontend Implemented
+
+---
+
 v2.2.2
 
 - `Jest` test issue fixed
