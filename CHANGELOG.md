@@ -1,3 +1,9 @@
+v2.2.2
+
+- `Jest` test issue fixed
+
+---
+
 v2.2.1
 
 - Bug Fixes

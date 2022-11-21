@@ -8,6 +8,8 @@ import app from "../src/index"
 let TEST_EMAIL = uuidv4() + '@gmail.com',
     TEST_PASSWORD = "password",
     TEST_VACCINE_UPDATE_ID: any,
+    TEST_NAME = "Test Name",
+    TEST_PHONE = "9876543456",
 
     TEST_VACCINE = {
         "name": "Test Vaccine Name",
@@ -17,7 +19,8 @@ let TEST_EMAIL = uuidv4() + '@gmail.com',
         "manufacturer": "Test Manufacturer",
         "developedYear": 2022,
         "ageGroup": "Test Group",
-        "sideEffects": "Test Side Effect"
+        "sideEffects": "Test Side Effect",
+        "mandatory": [true, false][Math.floor(Math.random() * 2)]
     },
     TEST_VACCINE_UPDATE = {
         "name": "Test Vaccine Name Update",
@@ -27,7 +30,8 @@ let TEST_EMAIL = uuidv4() + '@gmail.com',
         "manufacturer": "Test Manufacturer Update",
         "developedYear": 2024,
         "ageGroup": "Test Group Update",
-        "sideEffects": "Test Side Effect Update"
+        "sideEffects": "Test Side Effect Update",
+        "mandatory": [true, false][Math.floor(Math.random() * 2)]
     }
 
 let ACCESS_TOKEN: String, REFRESH_TOKEN: String,
@@ -41,7 +45,9 @@ describe('POST /signup & POST /signin', () => {
     it('Signup - Creating a new user - 201', async () => {
         let data = {
             'email': TEST_EMAIL,
-            'password': TEST_PASSWORD
+            'password': TEST_PASSWORD,
+            'name': TEST_NAME,
+            'phone': TEST_PHONE
         }
         await Register(request, app, data)
         let login = await Login(request, app, data)

@@ -21,7 +21,7 @@ describe('POST /signup', () => {
     it('SIGNUP : Creating a new user - 201', (done) => {
         request(app)
             .post('/signup')
-            .send({ 'email': TEST_EMAIL, 'password': TEST_PASSWORD })
+            .send({ 'email': TEST_EMAIL, 'password': TEST_PASSWORD, 'name': TEST_NAME, 'phone': TEST_PHONE })
             .set('Accept', 'application/json')
             .expect('Content-Type', /json/)
             .expect(201, done)
@@ -29,7 +29,7 @@ describe('POST /signup', () => {
     it('SIGNUP : Email Already Exists - 409', (done) => {
         request(app)
             .post('/signup')
-            .send({ 'email': TEST_EMAIL, 'password': TEST_PASSWORD })
+            .send({ 'email': TEST_EMAIL, 'password': TEST_PASSWORD, 'name': TEST_NAME, 'phone': TEST_PHONE })
             .set('Accept', 'application/json')
             .expect('Content-Type', /json/)
             .expect(409, done);
