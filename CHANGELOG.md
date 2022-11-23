@@ -1,3 +1,9 @@
+v2.7.1
+
+- Updated the vaccine show page with better UI placement
+
+---
+
 v2.7.0
 
 - Updated Readme

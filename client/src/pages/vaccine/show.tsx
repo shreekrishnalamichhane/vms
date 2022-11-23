@@ -10,6 +10,7 @@ import { useEffect } from 'react'
 import CustomListGroup from '../../components/listGroups/CustomListGroup';
 import CustomLoader from '../../components/loader/CustomLoader';
 import CustomContainer from '../../components/CustomContainer';
+import Description from '../../components/Description';
 
 
 function VaccineShow() {
@@ -54,20 +55,23 @@ function VaccineShow() {
                 <Row>
                     <Col lg={8} md={8} sm={12}>
                         <Image className='w-100' src={data.data.image} />
-                        <p className='pt-3'>Latest Update By: {data.data.User.name} </p>
-                        <p className='pb-3'>Email: {data.data.User.email} </p>
+                        <p className='fw-bold pt-3'>Latest Update By: {data.data.User.name} </p>
+                        <p className='fw-bold pb-3'>Email: {data.data.User.email} </p>
+
+                        <Description name="Description" data={data.data.description} />
+
+                        <br />
+                        <Description name="Side Effects" data={data.data.sideEffects} />
                     </Col>
                     <Col lg={4} md={4} sm={12}>
                         <h3 className='pt-5'>{data.data.name}</h3>
                         {data.data.mandatory ? <Badge bg="danger">Mandatory</Badge> : <Badge bg="success">Not Mandatory</Badge>}
                         <br></br>
-                        <p className='pt-3'>{data.data.description}</p>
                         <ListGroup as="ol" className='py-3'>
                             <CustomListGroup name="Number of Doses" data={data.data.numberOfDoses} />
                             <CustomListGroup name="Manufacturer" data={data.data.manufacturer} />
                             <CustomListGroup name="Developed Year" data={data.data.developedYear} />
                             <CustomListGroup name="Age Group" data={data.data.ageGroup} />
-                            <CustomListGroup name="Side Effects" data={data.data.sideEffects} />
                         </ListGroup>
                     </Col>
                 </Row>
