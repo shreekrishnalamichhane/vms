@@ -1,3 +1,9 @@
+v2.7.2
+
+- Mandatory Priority in vaccine indexing
+
+---
+
 v2.7.1
 
 - Updated the vaccine show page with better UI placement

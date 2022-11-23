@@ -15,7 +15,15 @@ const VaccineService = {
             return await prisma.vaccine.findMany({
                 include: {
                     User: true
-                }
+                },
+                orderBy: [
+                    {
+                        mandatory: "desc",
+                    },
+                    {
+                        id: "desc",
+                    }
+                ],
             });
         } catch (err: any) {
             throw err
